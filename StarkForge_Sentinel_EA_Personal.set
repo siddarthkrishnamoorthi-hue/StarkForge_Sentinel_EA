@@ -1,0 +1,103 @@
+;=====================================================================
+; StarkForge Sentinel EA v1.00 - Personal Account Preset (Moderate)
+;=====================================================================
+; BALANCED LIVE-TRADING SETUP
+;
+;  - Risk 1.0% per trade
+;  - Daily loss stop: 3.0%
+;  - Max DD emergency stop: 10.0%
+;  - Up to 2 trades per day
+;  - After 3 consecutive losses, halt for 12 hours
+;  - Standard TP1 = 1.5R (40%) / TP2 = 2.5R (40%) + trailing runner
+;  - Break-even at +1R
+;
+; APPLY TO: EURUSD  (any broker prefix/suffix supported: EURUSDm, EURUSD.a, cEURUSD, etc.)
+; TIMEFRAME: M15
+; VERIFY: your broker's GMT offset — the trade window is BROKER TIME
+;=====================================================================
+
+; --- General
+InpMagicNumber=20260703
+InpTradeComment=SF_Personal
+InpEnableTrading=true
+InpVerboseLogging=true
+
+; --- Session (broker time)
+InpRangeStartHour=2
+InpRangeEndHour=13
+InpTradeStartHour=15
+InpTradeEndHour=19
+InpForceCloseHour=20
+InpCloseOnFriday=true
+InpSkipMondayFirstH=false
+
+; --- Trend Bias (H1)
+InpEmaFastPeriod=50
+InpEmaSlowPeriod=200
+InpAdxPeriod=14
+InpAdxThreshold=22.0
+
+; --- Signal (M15)
+InpAtrPeriod=14
+InpRetestAtrMult=0.35
+InpMaxRetestBars=12
+InpRsiPeriod=14
+InpRsiUpperBlock=72.0
+InpRsiLowerBlock=28.0
+InpCooldownBars=4
+
+; --- Stop Loss / Take Profit
+InpSLMode=0
+InpAtrSLMult=1.2
+InpFixedSLPips=20
+InpMinSLPips=8.0
+InpMaxSLPips=60.0
+InpTP1_R=1.5
+InpTP2_R=2.5
+InpPartial1_Percent=40.0
+InpPartial2_Percent=40.0
+InpBreakEven_R=1.0
+InpBreakEvenBufferP=2.0
+InpTrailAtrMult=1.8
+
+; --- Risk Management
+InpRiskPercent=1.0
+InpMaxLots=10.0
+InpMaxTradesPerDay=2
+InpDailyLossPercent=3.0
+InpMaxDDPercent=10.0
+InpMaxConsecLoss=3
+InpConsecPauseHours=12
+
+; --- Execution Filters
+InpMaxSpreadPoints=25
+InpMinAtrPips=4.0
+InpMaxSlippagePts=15
+InpUseNewsFilter=false
+InpNewsBlockTimes=08:30,12:30,14:00
+InpNewsBlockMinutes=20
+
+; --- Dashboard
+InpShowDashboard=true
+InpDashX=12
+InpDashY=24
+InpDashHeaderColor=clrGold
+InpDashLabelColor=clrLightGray
+InpDashValueColor=clrWhite
+InpDashOKColor=clrLime
+InpDashBadColor=clrRed
+
+; --- Broker Compatibility
+InpSymbolBase=EURUSD
+InpStrictSymbolCheck=true
+InpStopLevelBufferP=3
+InpAutoFillingMode=true
+
+; --- Execution Robustness
+InpModifyRetries=3
+InpModifyRetryDelayMs=150
+InpMgmtTimerMs=250
+InpDashRefreshMs=1000
+InpUseMarginCheck=true
+InpRequireConnection=true
+InpLogLevel=1
