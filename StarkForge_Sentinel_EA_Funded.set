@@ -1,0 +1,104 @@
+;=====================================================================
+; StarkForge Sentinel EA v1.00 - Funded Account Preset (Conservative)
+;=====================================================================
+; PROP-FIRM READY  (FTMO / Topstep / MyForexFunds / The5%ers etc.)
+;
+;  - Risk 0.4% per trade
+;  - Daily loss stop: 1.5% (well inside a 5% firm rule)
+;  - Max DD emergency stop: 4.5% (well inside a 10% firm rule)
+;  - Only 1 trade per day (single high-quality setup)
+;  - After 2 consecutive losses, halt for 24 hours
+;  - Higher ADX threshold + stricter retest tolerance
+;  - Earlier break-even (0.8R) + tighter trail (1.5 x ATR)
+;  - News-time filter enabled around 08:30 / 12:30 / 14:00 broker time
+;
+; APPLY TO: EURUSD  (any broker prefix/suffix supported: EURUSDm, EURUSD.a, cEURUSD, etc.)
+; TIMEFRAME: M15
+; VERIFY: your broker's GMT offset — the trade window is BROKER TIME
+;=====================================================================
+
+; --- General
+InpMagicNumber=20260703
+InpTradeComment=SF_Fnd
+InpEnableTrading=true
+InpVerboseLogging=false
+
+; --- Session (broker time)
+InpRangeStartHour=2
+InpRangeEndHour=13
+InpTradeStartHour=15
+InpTradeEndHour=19
+InpForceCloseHour=20
+InpCloseOnFriday=true
+InpSkipMondayFirstH=true
+
+; --- Trend Bias (H1) - stricter for prop firm
+InpEmaFastPeriod=50
+InpEmaSlowPeriod=200
+InpAdxPeriod=14
+InpAdxThreshold=25.0
+
+; --- Signal (M15) - stricter retest, longer cooldown
+InpAtrPeriod=14
+InpRetestAtrMult=0.30
+InpMaxRetestBars=10
+InpRsiPeriod=14
+InpRsiUpperBlock=70.0
+InpRsiLowerBlock=30.0
+InpCooldownBars=8
+
+; --- Stop Loss / Take Profit - protect capital fast
+InpSLMode=0
+InpAtrSLMult=1.2
+InpFixedSLPips=20
+InpMinSLPips=8.0
+InpMaxSLPips=45.0
+InpTP1_R=1.2
+InpTP2_R=2.0
+InpPartial1_Percent=50.0
+InpPartial2_Percent=30.0
+InpBreakEven_R=0.8
+InpBreakEvenBufferP=2.0
+InpTrailAtrMult=1.5
+
+; --- Risk Management - hard prop-firm safeguards
+InpRiskPercent=0.4
+InpMaxLots=5.0
+InpMaxTradesPerDay=1
+InpDailyLossPercent=1.5
+InpMaxDDPercent=4.5
+InpMaxConsecLoss=2
+InpConsecPauseHours=24
+
+; --- Execution Filters
+InpMaxSpreadPoints=20
+InpMinAtrPips=5.0
+InpMaxSlippagePts=10
+InpUseNewsFilter=true
+InpNewsBlockTimes=08:30,12:30,14:00
+InpNewsBlockMinutes=30
+
+; --- Dashboard
+InpShowDashboard=true
+InpDashX=12
+InpDashY=24
+InpDashHeaderColor=clrGold
+InpDashLabelColor=clrLightGray
+InpDashValueColor=clrWhite
+InpDashOKColor=clrLime
+InpDashBadColor=clrRed
+
+; --- Broker Compatibility
+InpSymbolBase=EURUSD
+InpStrictSymbolCheck=true
+InpStopLevelBufferP=3
+InpAutoFillingMode=true
+
+; --- Execution Robustness
+InpModifyRetries=3
+InpModifyRetryDelayMs=150
+InpMgmtTimerMs=200
+InpDashRefreshMs=1000
+InpUseMarginCheck=true
+InpRequireConnection=true
+InpLogLevel=2
